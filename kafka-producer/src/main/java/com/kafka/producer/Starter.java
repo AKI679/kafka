@@ -17,7 +17,7 @@ public class Starter {
         System.setProperty("java.security.auth.login.config", "/usr/ndp/current/kafka/");
         KafkaProducer<String, String> kafkaProducer = Producer.createProducer();
 
-        for (int var1 = 0; var1 < 100; ++var1) {
+        for (int var1 = 0; var1 < 100; ) {
             kafkaProducer.send(new ProducerRecord<String, String>("topicOne", "test", "test" + var1));
         }
 

@@ -31,8 +31,10 @@ public class ConsumerStarter {
             }
 
             for (ConsumerRecord<String, String> record : msgList) {
-                System.out.println(record.key() + "   " + record.value());
+                System.out.println("get date: " + record.key() + "   " + record.value());
+
             }
+            consumer.commitSync();
         }
     }
 }
