@@ -21,12 +21,18 @@ public class Producer {
             synchronized (Producer.class) {
                 if (kafkaProducer == null) {
                     Properties props = new Properties();
+                    //修改broker地址
                     props.put("bootstrap.servers", "localhost:9092");
                     props.put("acks", "all");
                     props.put("retries", 0);
                     props.put("batch.size", 16384);
                     props.put("key.serializer", StringSerializer.class.getName());
                     props.put("value.serializer", StringSerializer.class.getName());
+
+                    props.put("security.protocol", "SASL_PLAINTEXT");
+                    props.put("sasl.mechanism", "GSSAPI");
+                    props.put("sasl.kerberos.service.name", "kafka");
+
                     kafkaProducer = new KafkaProducer<String, String>(props);
                 }
             }

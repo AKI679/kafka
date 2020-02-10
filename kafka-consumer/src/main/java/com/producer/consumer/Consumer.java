@@ -23,6 +23,7 @@ public class Consumer {
             synchronized (Consumer.class) {
                 if (kafkaConsumer == null) {
                     Properties props = new Properties();
+                    //boker地址
                     props.put("bootstrap.servers", "localhost:9092");
                     props.put("group.id", "GroupOne");
                     props.put("enable.auto.commit", "true");
@@ -32,6 +33,11 @@ public class Consumer {
                     props.put("auto.offset.reset", "earliest");
                     props.put("key.deserializer", StringDeserializer.class.getName());
                     props.put("value.deserializer", StringDeserializer.class.getName());
+
+                    props.put("security.protocol", "SASL_PLAINTEXT");
+                    props.put("sasl.mechanism", "GSSAPI");
+                    props.put("sasl.kerberos.service.name", "kafka");
+
                     kafkaConsumer = new KafkaConsumer<String, String>(props);
                 }
             }
